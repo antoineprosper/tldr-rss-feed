@@ -10,7 +10,24 @@ MAX_ITEMS = 30  # keep a rolling window
 def make_pub_date(dt: datetime) -> str:
     """RFC 2822 date string required by RSS spec."""
     return formatdate(dt.timestamp(), usegmt=True)
-
+    
+def url_is_live(url: str) -> bool:
+    """HEAD request — cheap, no body download. Falls back to GET if server rejects HEAD."""
+    for method in ("HEAD", "GET"):
+        try:
+            req = urllib.request.Request(url, method=method)
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                return resp.status == 200
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                return False       # definitively not up yet
+            if method == "HEAD":
+                continue           # some servers block HEAD, retry with GET
+            return False
+        except Exception:
+            return False
+    return False
+    
 def build_new_item(date: datetime) -> ET.Element:
     date_str = date.strftime("%Y-%m-%d")
     url = f"{BASE_URL}/{date_str}"
@@ -36,8 +53,20 @@ def load_or_create_feed() -> ET.ElementTree:
 
 def main():
     today = datetime.now(timezone.utc).replace(hour=8, minute=0, second=0, microsecond=0)
+    date_str = today.strftime("%Y-%m-%d")
+    url = f"{BASE_URL}/{date_str}"
     tree = load_or_create_feed()
     channel = tree.find("channel")
+
+    # Guard 1: already captured today's article
+    if url in existing_guids:
+        print(f"Already have {date_str}, nothing to do.")
+        sys.exit(0)
+
+    # Guard 2: article not published yet
+    if not url_is_live(url):
+        print(f"Not live yet: {url} — will retry in 30 min.")
+        sys.exit(0)
 
     # Avoid duplicate entries
     existing_guids = {el.text for el in channel.findall("item/guid")}
