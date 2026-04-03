@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='us-ascii'?>
+<rss version="2.0">
+  <channel>
+    <title>TLDR Crypto Daily</title>
+    <link>https://tldr.tech/crypto</link>
+    <description>Auto-generated daily links to TLDR Crypto</description>
+  </channel>
+</rss>
