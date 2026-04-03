@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 from email.utils import formatdate
 import os
+import sys
 
 BASE_URL = "https://tldr.tech/crypto"
 FEED_FILE = "feed.xml"
