@@ -58,6 +58,9 @@ def main():
     tree = load_or_create_feed()
     channel = tree.find("channel")
 
+    # Avoid duplicate entries
+    existing_guids = {el.text for el in channel.findall("item/guid")}
+
     # Guard 1: already captured today's article
     if url in existing_guids:
         print(f"Already have {date_str}, nothing to do.")
@@ -68,8 +71,7 @@ def main():
         print(f"Not live yet: {url} — will retry in 30 min.")
         sys.exit(0)
 
-    # Avoid duplicate entries
-    existing_guids = {el.text for el in channel.findall("item/guid")}
+
     new_url = f"{BASE_URL}/{today.strftime('%Y-%m-%d')}"
 
     if new_url not in existing_guids:
