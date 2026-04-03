@@ -1,8 +1,14 @@
-<?xml version='1.0' encoding='us-ascii'?>
+<?xml version='1.0' encoding='utf-8'?>
 <rss version="2.0">
   <channel>
     <title>TLDR Crypto Daily</title>
     <link>https://tldr.tech/crypto</link>
     <description>Auto-generated daily links to TLDR Crypto</description>
+    <item>
+      <title>TLDR Crypto – 2026-04-03</title>
+      <link>https://tldr.tech/crypto/2026-04-03</link>
+      <guid isPermaLink="true">https://tldr.tech/crypto/2026-04-03</guid>
+      <pubDate>Fri, 03 Apr 2026 08:00:00 GMT</pubDate>
+    </item>
   </channel>
 </rss>
