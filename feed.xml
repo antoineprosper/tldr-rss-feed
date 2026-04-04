@@ -1,9 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss version="2.0">
+<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
   <channel>
     <title>TLDR Crypto Daily</title>
     <link>https://tldr.tech/crypto</link>
     <description>Auto-generated daily links to TLDR Crypto</description>
+    <item>
+      <title>TLDR Newsletter - A Byte Sized Daily Tech Newsletter</title>
+      <link>https://tldr.tech/crypto/2026-04-04</link>
+      <guid isPermaLink="true">https://tldr.tech/crypto/2026-04-04</guid>
+      <pubDate>Sat, 04 Apr 2026 08:00:00 GMT</pubDate>
+      <media:content url="https://tldr.tech/logo-jpg.jpg" medium="image" />
+    </item>
     <item>
       <title>x402 Foundation 🏦, Drift $285M Hack 🥷, Alabama DAO Bill 🗳️</title>
       <link>https://tldr.tech/crypto/2026-04-03</link>
